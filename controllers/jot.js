@@ -48,7 +48,6 @@ export async function deleteNote(req, res) {
 }
 
 export async function renderEditNoteForm(req, res) {
-    debugger;
     try {
         const noteId = req.params.id;
         const note = await JotNote.findById(noteId);
