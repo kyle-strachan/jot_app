@@ -1,0 +1,22 @@
+<h1>Create a New Note</h1>
+<form action="/notes" method="POST">
+  <label for="title" class="form-label">Title</label>
+  <input
+    type="text"
+    class="form-input"
+    id="title"
+    name="title"
+    required
+    placeholder="Enter a note title"
+  />
+  <label for="body" class="form-label">Write your note here:</label>
+  <input
+    type="text"
+    class="form-input"
+    id="body"
+    name="body"
+    required
+    placeholder="Enter your note here"
+  />
+  <button type="submit">Jot</button>
+</form>

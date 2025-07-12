@@ -1,0 +1,25 @@
+<%- contentFor('body') %>
+
+<h1>Edit Note</h1>
+<p>Currently editing note ID: <%= note._id %></p>
+<form action="/notes/<%= note._id %>?_method=PUT" method="POST">
+  <label for="title" class="form-label">Title</label>
+  <input
+    type="text"
+    class="form-input"
+    id="title"
+    name="title"
+    required
+    value="<%= note.title %>"
+  />
+  <label for="body" class="form-label">Write your note here:</label>
+  <input
+    type="text"
+    class="form-input"
+    id="body"
+    name="body"
+    required
+    value="<%= note.body %>"
+  />
+  <button type="submit">Jot</button>
+</form>

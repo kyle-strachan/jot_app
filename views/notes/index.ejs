@@ -1,0 +1,22 @@
+<%- contentFor("body") %>
+
+<p>This is the private homepage, must be logged in to see this.</p>
+
+<b><a href="/notes/new">Create a new note</a></b>
+
+<p>Beginning of notes list</p>
+
+<% if (notes.length === 0) { %>
+<p>There are no notes.</p>
+<% } else { %> <% notes.forEach(note => { %>
+<div class="note-container">
+  <p><%= note._id %></p>
+  <p><%= note.title %></p>
+  <p><%= note.body %></p>
+  <a href="/notes/<%= note._id %>/edit">Edit</a>
+  <form action="/notes/<%= note._id %>?_method=DELETE" method="POST">
+    <button type="submit">Delete</button>
+  </form>
+</div>
+<% }) %> <% } %>
+<p>End of notes list</p>
