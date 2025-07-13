@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import 'dotenv/config';
 import jotRoutes from "./routes/jotRoutes.js";
 import methodOverride from "method-override";
+import cookieParser from "cookie-parser"; // Required to read refreshToken
 
 const app = express();
 const PORT = process.env.PORT //|| 3000
@@ -15,6 +16,7 @@ const __dirname = path.dirname(__filename);
 
 // App config
 app.set("views", path.join(__dirname, "views"));
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // Next bit is required to look for DELETE method inside a POST request
