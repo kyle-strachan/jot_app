@@ -35,11 +35,20 @@ export async function renderNewNoteForm(req, res) {
 
 export async function deleteNote(req, res) {
     try {
-        // Would like: check logged in user is the owner of this note
-        const deletedNote = await JotNote.findByIdAndDelete(req.params.id);
-        if (!deletedNote) {
-            return res.status(404).send("Note not found");
+        // Check note belongs to logged in user (broken access control mitigation)
+        const note = await JotNote.findById(req.params.id);
+        if (!note) {
+            return res.status(404).send({ message: "Note not found" });
         }
+        if (note.username !== req.userId) {
+            return res.status(403).send({ message: "You do not have permission to delete this note." })
+        }
+
+        // const deletedNote = 
+        await JotNote.findByIdAndDelete(req.params.id);
+        // if (!deletedNote) {
+        //     return res.status(404).send("Note not found");
+        // }
         res.redirect("/notes/");
     } catch (error) {
         console.error("Error deleting note:", error);
@@ -67,11 +76,16 @@ export async function renderEditNoteForm(req, res) {
 
 export async function editNote(req, res) {
     try {
-        const { title, body } = req.body;
-        const updated = await JotNote.findByIdAndUpdate(req.params.id, { title, body }, { new: true });
-        if (!updated) {
+        const note = await JotNote.findById(req.params.id);
+        if (!note) {
             return res.status(404).send("Note not found");
         }
+        if (note.username !== req.userId) {
+            return res.status(403).send({ message: "You do not have permission to edit this note." })
+        }
+        
+        const { title, body } = req.body;
+        const updated = await JotNote.findByIdAndUpdate(req.params.id, { title, body }, { new: true });
         res.redirect("/notes/");
     } catch (error) {
         console.error("Error updating note:", error);
