@@ -1,11 +1,11 @@
 import JotNote from "../models/notes.js"
 
 export async function createNote(req, res) {
-    const username = "DevUI"
+    // const username = "DevUI"
     try {
         const { title, body } = req.body;
         await JotNote.create({
-            username,
+            username: req.userId,
             title,
             body
         });
@@ -17,9 +17,9 @@ export async function createNote(req, res) {
 }
 
 export async function getNotes(req, res) {
-    const username = "Dev1"
+    // const username = "Dev1"
     try {
-        const notes = await JotNote.find().sort({ date: -1 });
+        const notes = await JotNote.find({ username: req.userId }).sort({ date: -1 });
         res.render("notes/index", { title: "My Notes", notes });
     } catch (error) {
         console.error("Failed to fetch notes:", error);
