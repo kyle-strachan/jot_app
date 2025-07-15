@@ -1,7 +1,6 @@
 import JotNote from "../models/notes.js"
 
 export async function createNote(req, res) {
-    // const username = "DevUI"
     try {
         const { title, body } = req.body;
         await JotNote.create({
@@ -17,7 +16,6 @@ export async function createNote(req, res) {
 }
 
 export async function getNotes(req, res) {
-    // const username = "Dev1"
     try {
         const notes = await JotNote.find({ username: req.userId }).sort({ date: -1 });
         res.render("notes/index", { title: "My Notes", notes });
@@ -36,19 +34,12 @@ export async function renderNewNoteForm(req, res) {
 export async function deleteNote(req, res) {
     try {
         // Check note belongs to logged in user (broken access control mitigation)
-        const note = await JotNote.findById(req.params.id);
+        const note = await JotNote.findOne({ _id: req.params.id, username: req.userId });
         if (!note) {
-            return res.status(404).send({ message: "Note not found" });
+            // Note is either not found or user does not have permission to delete it
+            return res.status(404).send({ message: "Unable to modify this note." });
         }
-        if (note.username !== req.userId) {
-            return res.status(403).send({ message: "You do not have permission to delete this note." })
-        }
-
-        // const deletedNote = 
-        await JotNote.findByIdAndDelete(req.params.id);
-        // if (!deletedNote) {
-        //     return res.status(404).send("Note not found");
-        // }
+        await note.deleteOne();
         res.redirect("/notes/");
     } catch (error) {
         console.error("Error deleting note:", error);
@@ -73,19 +64,18 @@ export async function renderEditNoteForm(req, res) {
     }
 }
 
-
 export async function editNote(req, res) {
     try {
-        const note = await JotNote.findById(req.params.id);
-        if (!note) {
-            return res.status(404).send("Note not found");
-        }
-        if (note.username !== req.userId) {
-            return res.status(403).send({ message: "You do not have permission to edit this note." })
-        }
-        
         const { title, body } = req.body;
-        const updated = await JotNote.findByIdAndUpdate(req.params.id, { title, body }, { new: true });
+        const note = await JotNote.findOneAndUpdate(
+            { _id: req.params.id, username: req.userId }, 
+            { title, body },
+            { new: true }
+        );
+        if (!note) {
+            // Note is either not found or user does not have permission to edit it
+            return res.status(404).send({ message: "Unable to modify this note." });
+        }
         res.redirect("/notes/");
     } catch (error) {
         console.error("Error updating note:", error);
