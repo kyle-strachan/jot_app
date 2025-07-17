@@ -5,7 +5,8 @@ import {
     renderNewNoteForm,
     deleteNote,
     editNote,
-    renderEditNoteForm
+    renderEditNoteForm,
+    renderIndex
 } from "../controllers/jot.js"
 import {
     register,
@@ -16,8 +17,11 @@ import { authMiddleware } from "../middleware/auth.js";
 
 const router = Router();
 
+// Show homepage
+router.get("/", renderIndex);
+
 // Get existing notes
-router.get("/notes", authMiddleware, getNotes)
+router.get("/notes", authMiddleware, getNotes);
 
 // Create new note
 router.post("/notes", authMiddleware, createNote);

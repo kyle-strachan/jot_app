@@ -7,3 +7,12 @@ body {
     margin: 30px 10px;
     padding: 20px;
 }
+
+.ui-message-error {
+    border: 1px solid red;
+    border-radius: 5px;
+    background-color: rgb(255, 238, 241);
+    color: red;
+    padding: 5px 10px;
+    margin: 5px 0;
+}

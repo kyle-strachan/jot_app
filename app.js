@@ -32,9 +32,9 @@ app.use(expressEjsLayouts);
 app.use(express.urlencoded({ extended: true })); // had to add as post from ejs from was undefined. Research further
 app.use(express.json()); // Provides ability to destructure JSON
 
-app.get("/", (req, res) => {
-    res.render("index", { title: "JOT HOME"});
-})
+// app.get("/", (req, res) => {
+//     res.render("index", { title: "JOT HOME", sampleMessage: "Sample Message"});
+// })
 
 // Router config
 app.use("/", jotRoutes);

@@ -1,5 +1,10 @@
 import JotNote from "../models/notes.js"
 
+export function renderIndex(req, res) {
+    console.log("renderIndex");
+    res.render("index", { title: "JOT HOME" , uiMessages: { login: null }});
+}
+
 export async function createNote(req, res) {
     try {
         const { title, body } = req.body;
