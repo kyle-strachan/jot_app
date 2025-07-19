@@ -1,62 +1,69 @@
 <main>
-  <p>
+  <!-- <p>
     This is the public home page. This can be shown logged in or not logged in.
   </p>
-  <a href="./notes/">Go to my notes.</a>
+  <a href="./notes/">Go to my notes.</a> -->
 
-  <section>
-    <h2>Sign up</h2>
-    <form action="/register" method="POST">
-      <label for="username" class="form-label">Username</label>
-      <input
-        type="text"
-        class="form-input"
-        id="username"
-        name="username"
-        required
-        placeholder="Enter a new username"
-      />
-      <label for="password" class="form-label">Password</label>
-      <input
-        type="password"
-        class="form-input"
-        id="password"
-        name="password"
-        required
-        placeholder="Password"
-      />
-      <button type="submit">Register</button>
-      <% if (uiMessages.register ) { %>
-      <div class="ui-message-error"><%= uiMessages.register %></div>
-      <% } %>
-    </form>
-  </section>
+  <div class="login-panel">
+    <div class="login-panel-header"></div>
+    <div class="login-panel-body">
+      <h1>Jot</h1>
+      <div class="login-subtitle">a note-taking app</div>
+      <section>
+        <div class="login-panel-section-heading"><h2>Sign up</h2></div>
+        <form action="/register" method="POST">
+          <label for="username" class="form-label">Username</label><br />
+          <input
+            type="text"
+            class="form-input"
+            id="username"
+            name="username"
+            required
+            placeholder="Enter a new username"
+          /><br />
+          <label for="password" class="form-label">Password</label><br />
+          <input
+            type="password"
+            class="form-input"
+            id="password"
+            name="password"
+            required
+            placeholder="Password"
+          /><br />
+          <% if (uiMessages.register ) { %>
+          <div class="ui-message-error"><%= uiMessages.register %></div>
+          <% } %>
+          <button type="submit">Register</button>
+        </form>
+      </section>
 
-  <section>
-    <h2>Login</h2>
-    <form action="/login" method="POST">
-      <label for="username" class="form-label">Username</label>
-      <input
-        type="text"
-        class="form-input"
-        id="username"
-        name="username"
-        required
-        placeholder="Enter your username"
-      />
-      <label for="password" class="form-label">Password</label>
-      <input
-        type="password"
-        class="form-input"
-        id="password"
-        name="password"
-        required
-        placeholder="Password"
-      />
-      <button type="submit">Login</button>
-      <% if (uiMessages.login ) { %>
-      <div class="ui-message-error"><%= uiMessages.login %></div>
-      <% } %>
-    </form>
-  </section>
+      <section>
+        <div class="login-panel-section-heading"><h2>Login</h2></div>
+        <form action="/login" method="POST">
+          <label for="username" class="form-label">Username</label><br />
+          <input
+            type="text"
+            class="form-input"
+            id="username"
+            name="username"
+            required
+            placeholder="Enter your username"
+          /><br />
+          <label for="password" class="form-label">Password</label><br />
+          <input
+            type="password"
+            class="form-input"
+            id="password"
+            name="password"
+            required
+            placeholder="Password"
+          /><br />
+          <button type="submit">Login</button>
+          <% if (uiMessages.login ) { %>
+          <div class="ui-message-error"><%= uiMessages.login %></div>
+          <% } %>
+        </form>
+      </section>
+    </div>
+  </div>
 </main>

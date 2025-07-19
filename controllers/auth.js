@@ -8,6 +8,7 @@ const REGEX_PASSWORD = /^[a-zA-Z0-9!@#$%^&*()]+$/;
 
 export async function register(req, res) {
     // console.log("Register route found");
+    // debugger;
     let { username, password } = req.body;
 
     username = username.trim().toLowerCase();
@@ -42,6 +43,7 @@ export async function register(req, res) {
             title: "Registration error",
             uiMessages: { register: `Registration failed: a password must be a minimum of ${PASSWORD_MIN_LENGTH} characters long.` }
         });
+        return;
     }
 
     try {
@@ -61,7 +63,10 @@ export async function register(req, res) {
             username,
             passwordHash: hashedPassword
         });
-        res.status(201).json({ message: "User successfully created, please log in."});
+        console.log("User successfully created");
+        // res.status(201).json({ message: "User successfully created, please log in."});
+        // res.redirect("/notes");
+        login(req, res);
 
     } catch (error) {
         if (error.code === 11000) {
@@ -74,6 +79,14 @@ export async function register(req, res) {
 export async function login(req, res) {
     // BUG: username in case matters!! convert all to lower case?
     console.log("Login route found");
+    
+    // During testing I found an abandoned session could be recovered when switching between users. This forces a logout
+    res.clearCookie("refreshToken", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "Lax"
+    });
+
     let { username, password } = req.body;
     
     // Register forces lowercase username, login forces to match
@@ -107,10 +120,14 @@ export async function login(req, res) {
 }
 
 export async function logout(req, res) {
-    res.clearCookie("refreshToken", {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "Lax"
-    });
-    res.redirect("/");
+    try {
+        res.clearCookie("refreshToken", {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "Lax"
+        });
+        res.redirect("/");
+    } catch (error) {
+        res.redirect("/");
+    }
 }

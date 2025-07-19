@@ -1,9 +1,8 @@
 import mongoose from "mongoose";
 
 const jotSchema = new mongoose.Schema({
-    userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+    username: {
+        type: String,
         required: true
     },
     title: {

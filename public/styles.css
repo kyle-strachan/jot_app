@@ -1,5 +1,54 @@
+:root {
+    --system-grey: #F5F5F5;
+    --system-grey-hover: #dbdbdb;
+    --system-panel: #ffffff;
+    --system-panel-border: #E9E9E9;
+    --system-blue: #d42000;
+    --system-blue-bg: #d6edff;
+    --system-blue-hover:#960500;
+    --system-box-shadow: rgba(116, 116, 116, 0.2);
+    --default-color: #553634;
+    --header-height: 50px;
+    /* font-family: "Inter", sans-serif; */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-    color: blue;
+    color: black;
+    background-color: rgb(245, 244, 242);
+    font-family: "Inter", sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+}
+
+/* Headers */
+h1 {
+    font-family: "Reenie Beanie", cursive;
+    font-weight: 400;
+    font-size: 80px;
+    line-height: 60px;
+}
+
+/* Buttons */
+button {
+    color: white;
+    background-color: black; /* #ceb283 */ 
+    border-radius: 5px;
+    margin: 10px 0px;
+    padding: 10px;
+    border: 1px solid black;
+    font-family: "Inter", sans-serif;
+}
+button:hover {
+    color: white;
+    background-color: black;
 }
 
 .note-container {
@@ -15,4 +64,83 @@ body {
     color: red;
     padding: 5px 10px;
     margin: 5px 0;
+}
+
+
+/* Login portal */
+.login-panel {
+    background-color: var(--system-panel);
+    border: 1px solid var(--system-panel-border);
+    border-radius: 10px;
+    width: 395px;
+    margin: 50px auto;
+    box-shadow: 0px 5px 5px var(--system-box-shadow);
+}
+.login-panel-header {
+    /* background-color: black; */
+    background-image: url("/images/login-panel-header-pattern.webp");
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 10px;
+}
+
+.login-panel-body {
+    padding: 40px;
+}
+
+.login-subtitle {
+    font-family: "Reenie Beanie", cursive;
+    font-weight: 400;
+    font-size: 30px;
+    text-indent: 20px;
+    margin-bottom: 30px;
+}
+
+.login-panel input {
+    width: 100%;
+    height: 2rem;
+    text-indent: 8px;
+    margin-top: 4px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+    font-family: "Inter", sans-serif;
+}
+
+.login-panel label {
+    font-size: 0.9rem;
+}
+
+.login-panel h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+
+/* Footer*/
+.footer-credits {
+    color: #888;
+    font-size: 0.8rem;
+    text-align: center;
+    margin: 20px auto;
+}
+
+
+/* Note diplay */
+
+.note-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    /* flex-direction: row; */
+    width: 800px;
+    padding: 50px;
+    background-color: red;
+}
+
+.note-column {
+    flex: 1;
+    background-color: white;
+    width: 200px;
+    border: 1px solid black;
 }
