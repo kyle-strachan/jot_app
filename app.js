@@ -7,6 +7,7 @@ import 'dotenv/config';
 import jotRoutes from "./routes/jotRoutes.js";
 import methodOverride from "method-override";
 import cookieParser from "cookie-parser"; // Required to read refreshToken
+import { rateLimitMiddleware } from "./middleware/rateLimit.js";
 
 const app = express();
 const PORT = process.env.PORT //|| 3000
@@ -35,6 +36,9 @@ app.use(express.json()); // Provides ability to destructure JSON
 // app.get("/", (req, res) => {
 //     res.render("index", { title: "JOT HOME", sampleMessage: "Sample Message"});
 // })
+
+// Protect all routes with rate limiter
+app.use(rateLimitMiddleware);
 
 // Router config
 app.use("/", jotRoutes);

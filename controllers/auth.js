@@ -10,6 +10,9 @@ export async function register(req, res) {
     // console.log("Register route found");
     let { username, password } = req.body;
 
+    username = username.trim().toLowerCase();
+    password = password.trim();
+
     if (!REGEX_USERNAME.test(username)) {
         res.render("index", {
             title: "Registration error",
@@ -40,9 +43,6 @@ export async function register(req, res) {
             uiMessages: { register: `Registration failed: a password must be a minimum of ${PASSWORD_MIN_LENGTH} characters long.` }
         });
     }
-
-    // Prevent username case sensitivity
-    username = username.toLowerCase();
 
     try {
         // Check for existing user
@@ -77,7 +77,8 @@ export async function login(req, res) {
     let { username, password } = req.body;
     
     // Register forces lowercase username, login forces to match
-    username = username.toLowerCase();
+    username = username.trim().toLowerCase();
+    password = password.trim();
     
     const user = await User.findOne({ username });
     if (!user) {

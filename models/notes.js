@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
 
 const jotSchema = new mongoose.Schema({
-    username: {
-        type: String,
-        default: "dev"
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
     },
     title: {
         type: String,

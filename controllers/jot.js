@@ -8,6 +8,7 @@ export function renderIndex(req, res) {
 export async function createNote(req, res) {
     try {
         const { title, body } = req.body;
+
         await JotNote.create({
             username: req.userId,
             title,
