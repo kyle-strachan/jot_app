@@ -39,15 +39,33 @@ h1 {
 
 /* Buttons */
 button {
-    /* color: white; */
-    /* background-color: black; #ceb283  */
     border-radius: 5px;
     margin: 10px 0px;
     padding: 10px;
     border: 1px solid black;
-    font-family: "Inter", sans-serif;
+    /* font-family: "Inter", sans-serif; */
     font-size: 1.0rem;
 }
+button:hover {
+    cursor: pointer;
+}
+.link-as-button {
+    border-radius: 5px;
+    margin: 10px 0px;
+    padding: 10px;
+    border: 1px solid black;
+    /* font-family: "Inter", sans-serif; */
+    font-size: 1.0rem;
+    text-decoration: none;
+    color: black;
+}
+.link-as-button:hover{
+    color: white;
+    border-color: #E03C31;
+    background-color: #E03C31;
+}
+
+
 .button-black {
     color: white;
     background-color: black;
@@ -69,9 +87,9 @@ button {
     background-color: white;
 }
 .button-delete:hover {
-    color: red;
-    border-color: red;
-    background-color: rgb(255, 203, 203);
+    color: white;
+    border-color: #E03C31;
+    background-color: #E03C31;
 }
 
 
@@ -83,10 +101,10 @@ button {
 
 
 .ui-message-error {
-    border: 1px solid red;
+    border: 1px solid #E03C31;
     border-radius: 5px;
     background-color: rgb(255, 238, 241);
-    color: red;
+    color: #E03C31;
     padding: 5px 10px;
     margin: 5px 0;
 }
@@ -157,6 +175,9 @@ button {
 }
 
 /* Footer*/
+footer {
+    margin-top: 75px;
+}
 .footer-credits {
     color: #888;
     font-size: 0.8rem;

@@ -15,10 +15,8 @@
         value="<%= note.title %>"
       /><br />
       <div class="jot-label">
-        <label for="body" class="form-label">Write your note here:</label>
+        <label for="body" class="form-label">Update your note</label>
       </div>
-      <%= note.color %>
-
       <textarea name="body" id="body" class="jot" rows="10" required>
 <%= note.body %></textarea
       ><br />
@@ -54,7 +52,10 @@
           <span class="color-circle purple"></span>
         </label>
       </div>
-      <button type="submit" class="button-black">Update Jot</button>
+      <div class="controls">
+        <button type="submit" class="button-black">Update Jot</button
+        ><a href="/notes" class="link-as-button">Cancel</a>
+      </div>
     </form>
   </div>
 </div>
