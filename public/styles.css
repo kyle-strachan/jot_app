@@ -18,12 +18,13 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: "Inter", sans-serif;
 }
 
 body {
     color: black;
     background-color: rgb(245, 244, 242);
-    font-family: "Inter", sans-serif;
+    /* font-family: "Inter", sans-serif; */
     font-weight: 300;
     font-size: 15px;
 }
@@ -45,6 +46,7 @@ button {
     padding: 10px;
     border: 1px solid black;
     font-family: "Inter", sans-serif;
+    font-size: 1.0rem;
 }
 .button-black {
     color: white;
@@ -115,7 +117,7 @@ button {
     font-family: "Reenie Beanie", cursive;
     font-weight: 400;
     font-size: 30px;
-    text-indent: 20px;
+    padding-left: 20px;
     margin-bottom: 30px;
 }
 
@@ -141,7 +143,7 @@ button {
 
 /* Jot containers */
 .container {
-    width: 1000px;
+    max-width: 1000px;
     margin: auto;
 }
 
@@ -192,12 +194,13 @@ button {
     border: 1px solid black;
 } */
 
-.note-header-green {
-    background-color: green;
+.note-header {
+    /* background-color: green; */
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     height: 10px;
 }
+
 .note-content {
     padding: 20px;
 }
@@ -234,4 +237,71 @@ button {
 /* Panel colours */
 .panel-green:hover {
     background-color: rgb(226, 238, 212);
+}
+
+/* Inputs */
+
+textarea.jot {
+    width: 100%;
+    padding: 5px 7px;
+    font-size: 1.2rem;
+}
+
+input.jot {
+    width: 100%;
+    padding: 5px 7px;
+    font-size: 1.2rem;
+}
+
+.jot-label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+/* Radio colour picker */
+.color-picker {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.color-picker input[type="radio"] {
+  display: none; /* hide the default radio button */
+}
+
+.color-circle {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  /* transition: border 0.2s; */
+}
+
+/* Color classes */
+.black { background-color: black; }
+.red { background-color: #E03C31; }
+.blue { background-color: #4E87A0; }
+.green { background-color: #00B388; }
+.yellow { background-color: #eaaa00; }
+.purple { background-color: #24135F; }
+
+/* Output color combination */
+.jot-panel-black:hover {background-color: rgb(233, 233, 233);}
+.jot-panel-red:hover {background-color: #ffd2cf;}
+.jot-panel-blue:hover {background-color: #cff1ff;}
+.jot-panel-green:hover {background-color: #d2fff5;}
+.jot-panel-yellow:hover {background-color: #fff2d0;}
+.jot-panel-purple:hover {background-color: #ebe5ff;}
+
+/* Outline the selected one */
+.color-picker input[type="radio"]:checked + .color-circle {
+  border-color: black;
+}
+
+.color-picker input[type="radio"]:hover + .color-circle {
+    border: 2px solid black;
 }

@@ -13,7 +13,8 @@ export function authMiddleware(req, res, next) {
     const refreshToken = req.cookies.refreshToken;
 
     if (!accessToken && !refreshToken) {
-        return res.status(401).json({ error: "Access denied; no token provided." });
+        // return res.status(401).json({ error: "Access denied; no token provided." });
+        return res.status(401).redirect("/");
     }
 
     if (accessToken) {

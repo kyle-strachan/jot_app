@@ -7,13 +7,15 @@ export function renderIndex(req, res) {
 }
 
 export async function createNote(req, res) {
+    // debugger;
     try {
-        const { title, body } = req.body;
-
+        const { title, body, color } = req.body;
+        // console.log(req.body.color);
         await JotNote.create({
             username: req.userId,
             title,
-            body
+            body,
+            color
         });
         res.redirect('/notes/');
     } catch (error) {
@@ -76,10 +78,10 @@ export async function renderEditNoteForm(req, res) {
 
 export async function editNote(req, res) {
     try {
-        const { title, body } = req.body;
+        const { title, body, color } = req.body;
         const note = await JotNote.findOneAndUpdate(
             { _id: req.params.id, username: req.userId }, 
-            { title, body },
+            { title, body, color },
             { new: true }
         );
         if (!note) {

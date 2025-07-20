@@ -17,10 +17,10 @@ const jotSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    tag: {
+    color: {
         type: String,
-        enum: ["Personal","Work","Other"],
-        default: "Personal"
+        enum: ["black", "red", "blue", "green", "yellow", "purple"],
+        default: "black"
     }
 });
 

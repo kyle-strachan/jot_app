@@ -16,12 +16,13 @@
   <% } else { %>
   <div class="note-grid">
     <% notes.forEach(note => { %>
-    <div class="note-container panel-green">
-      <div class="note-header-green"></div>
+    <div class="note-container jot-panel-<%= note.color %>">
+      <div class="note-header <%= note.color %>"></div>
       <div class="note-content">
-        <!-- <p><%= // note._id %></p> -->
         <h3><%= note.title %></h3>
         <p><%= note.body %></p>
+        <p><%= note._id %></p>
+        <p><%= note.date %></p>
       </div>
       <div class="flex-container flex-row-reverse controls">
         <form action="/notes/<%= note._id %>?_method=DELETE" method="POST">

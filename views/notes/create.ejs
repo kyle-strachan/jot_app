@@ -1,23 +1,57 @@
 <%- include("../partials/header.ejs") %>
-<h1>Create a New Note</h1>
-<form action="/notes" method="POST">
-  <label for="title" class="form-label">Title</label>
-  <input
-    type="text"
-    class="form-input"
-    id="title"
-    name="title"
-    required
-    placeholder="Enter a note title"
-  />
-  <label for="body" class="form-label">Write your note here:</label>
-  <input
-    type="text"
-    class="form-input"
-    id="body"
-    name="body"
-    required
-    placeholder="Enter your note here"
-  />
-  <button type="submit">Jot</button>
-</form>
+<div class="container">
+  <div class="container-content">
+    <form action="/notes" method="POST">
+      <div class="jot-label"><label for="title">New Jot title</label></div>
+      <input
+        type="text"
+        id="title"
+        class="jot"
+        name="title"
+        required
+        placeholder="Enter a note title"
+      /><br />
+      <div class="jot-label">
+        <label for="body" class="jot">Write your note here</label>
+      </div>
+      <textarea
+        name="body"
+        id="body"
+        class="jot"
+        rows="10"
+        required
+        placeholder="Enter your note here"
+      ></textarea
+      ><br />
+
+      <div class="color-picker">
+        <label>
+          <input type="radio" name="color" value="black" />
+          <span class="color-circle black"></span>
+        </label>
+        <label>
+          <input type="radio" name="color" value="red" />
+          <span class="color-circle red"></span>
+        </label>
+        <label>
+          <input type="radio" name="color" value="blue" />
+          <span class="color-circle blue"></span>
+        </label>
+        <label>
+          <input type="radio" name="color" value="green" />
+          <span class="color-circle green"></span>
+        </label>
+        <label>
+          <input type="radio" name="color" value="yellow" />
+          <span class="color-circle yellow"></span>
+        </label>
+        <label>
+          <input type="radio" name="color" value="purple" />
+          <span class="color-circle purple"></span>
+        </label>
+      </div>
+
+      <button type="submit" class="button-black">Jot</button>
+    </form>
+  </div>
+</div>
