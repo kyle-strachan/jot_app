@@ -1,8 +1,18 @@
 <header>
-  <div style="background-color: lightgray">
-    This is the header
-    <form action="/logout" method="POST">
-      <button type="submit">Logout</button>
-    </form>
+  <div>
+    <div class="container flex-container justify-between align-center">
+      <div class="flex-container align-center">
+        <div><h1>Jot</h1></div>
+        <div class="login-subtitle">// a Node.js note-taking app</div>
+      </div>
+      <div class="flex-container controls">
+        <form action="/notes/new">
+          <button type="submit" class="button-black">New Jot</button>
+        </form>
+        <form action="/logout" method="POST">
+          <button type="submit">Logout</button>
+        </form>
+      </div>
+    </div>
   </div>
 </header>

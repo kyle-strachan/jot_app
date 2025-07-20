@@ -1,26 +1,37 @@
 <%- contentFor("body") %><%- include("../partials/header.ejs") %>
 
-<p>This is the private homepage, must be logged in to see this.</p>
-
-<b><a href="/notes/new">Create a new note</a></b>
-
-<p>Beginning of notes list</p>
-
-<% if (notes.length === 0) { %>
-<p>There are no notes.</p>
-
-<% } else { %>
-<div class="note-grid">
-  <% notes.forEach(note => { %>
-  <div class="note-column">
-    <p><%= note._id %></p>
-    <p><%= note.title %></p>
-    <p><%= note.body %></p>
-    <a href="/notes/<%= note._id %>/edit">Edit</a>
-    <form action="/notes/<%= note._id %>?_method=DELETE" method="POST">
-      <button type="submit">Delete</button>
-    </form>
+<div class="container">
+  <div class="container-content">
+    <p>Logged in as <b><%= username %></b></p>
+    <!-- <p>This is the private homepage, must be logged in to see this.</p>
+    <b><a href="/notes/new">Create a new note</a></b>
+    <form action="/notes/new">
+      <button type="submit" class="button-black">New Jot</button>
+    </form> -->
   </div>
-  <% }) %> <% } %>
+
+  <% if (notes.length === 0) { %>
+  <p>There are no notes.</p>
+
+  <% } else { %>
+  <div class="note-grid">
+    <% notes.forEach(note => { %>
+    <div class="note-container panel-green">
+      <div class="note-header-green"></div>
+      <div class="note-content">
+        <!-- <p><%= // note._id %></p> -->
+        <h3><%= note.title %></h3>
+        <p><%= note.body %></p>
+      </div>
+      <div class="flex-container flex-row-reverse controls">
+        <form action="/notes/<%= note._id %>?_method=DELETE" method="POST">
+          <button type="submit" class="button-delete">Delete</button>
+        </form>
+        <form action="/notes/<%= note._id %>/edit/">
+          <button type="submit" class="button-white">Edit</button>
+        </form>
+      </div>
+    </div>
+    <% }) %> <% } %>
+  </div>
 </div>
-<p>End of notes list</p>
