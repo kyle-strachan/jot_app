@@ -2,7 +2,7 @@ import JotNote from "../models/notes.js"
 import User from "../models/users.js"
 
 export function renderIndex(req, res) {
-    console.log("renderIndex");
+    // console.log("renderIndex");
     res.render("index", { title: "JOT HOME" , uiMessages: { login: null }});
 }
 

@@ -30,20 +30,24 @@
     <% notes.forEach(note => { %>
     <div class="note-container jot-panel-<%= note.color %>">
       <div class="note-header <%= note.color %>"></div>
-      <div class="note-content">
-        <h3><%= note.title %></h3>
-        <p><%= note.body %></p>
-        <p><%= note._id %></p>
-      </div>
-      <div class="flex-container justify-between">
-        <div class="jot-date"><%= note.date.toDateString() %></div>
-        <div class="flex-container-internal controls">
-          <form action="/notes/<%= note._id %>/edit/">
-            <button type="submit" class="button-white">Edit</button>
-          </form>
-          <form action="/notes/<%= note._id %>?_method=DELETE" method="POST">
-            <button type="submit" class="button-delete">Delete</button>
-          </form>
+      <div class="note-content-container">
+        <div class="note-content">
+          <h3><%= note.title %></h3>
+          <p><%= note.body %></p>
+          <!-- <p><%= // note._id %></p> -->
+        </div>
+        <div class="flex-container justify-between">
+          <div class="jot-date">
+            <div><%= note.date.toDateString() %></div>
+          </div>
+          <div class="flex-container-internal controls">
+            <form action="/notes/<%= note._id %>/edit/">
+              <button type="submit" class="button-white">Edit</button>
+            </form>
+            <form action="/notes/<%= note._id %>?_method=DELETE" method="POST">
+              <button type="submit" class="button-delete">Delete</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>

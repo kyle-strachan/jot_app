@@ -7,8 +7,7 @@ const REGEX_USERNAME = /^[a-zA-Z0-9_]+$/;
 const REGEX_PASSWORD = /^[a-zA-Z0-9!@#$%^&*()]+$/;
 
 export async function register(req, res) {
-    // console.log("Register route found");
-    // debugger;
+
     let { username, password } = req.body;
 
     username = username.trim().toLowerCase();
@@ -53,9 +52,8 @@ export async function register(req, res) {
             res.render("index", {
             title: "Login error",
             uiMessages: { register: "Username already exists, please choose another." }
-        });
-        return;
-        // return res.status(409).json({ error: "Username already exists." });
+            });
+            return;
         }
        
         const hashedPassword = await User.hashPassword(password);
@@ -63,22 +61,30 @@ export async function register(req, res) {
             username,
             passwordHash: hashedPassword
         });
-        console.log("User successfully created");
-        // res.status(201).json({ message: "User successfully created, please log in."});
-        // res.redirect("/notes");
+        // console.log("User successfully created");
         login(req, res);
 
     } catch (error) {
+        // Error should be caught in check existingUser
         if (error.code === 11000) {
-            return res.status(409).json({ error: "User already exists with this email." });
+            res.render("index", {
+            title: "Login error",
+            uiMessages: { register: "Username already exists, please choose another." }
+            });
+            return;
         }
-        res.status(500).json({ error: error.message });
+        // General server error
+        res.render("index", {
+            title: "Login error",
+            uiMessages: { register: "Unable to create a new user at this time, please try again later." }
+            });
+            return;
     }
 }
 
 export async function login(req, res) {
     // BUG: username in case matters!! convert all to lower case?
-    console.log("Login route found");
+    // console.log("Login route found");
     
     // During testing I found an abandoned session could be recovered when switching between users. This forces a logout
     res.clearCookie("refreshToken", {
@@ -99,11 +105,16 @@ export async function login(req, res) {
             title: "Login error",
             uiMessages: { login: "Invalid login credentials, please try again." }
         });
-        return; //res.status(401).json({ error: "Invalid username" }) // TODO: Change later to be vague
+        return;
     }
     const isValidPassword = await user.isValidPassword(password);
     if (!isValidPassword) {
-        return res.status(401).json({ error: "Invalid password." });
+        res.render("index", {
+            title: "Login error",
+            uiMessages: { login: "Invalid login credentials, please try again." }
+        });
+        return;
+        // return res.status(401).json({ error: "Invalid password." });
     }
     const accessToken = signAccessToken(user.id);
     const refreshToken = signRefreshToken(user.id);

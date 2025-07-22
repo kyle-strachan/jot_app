@@ -9,11 +9,12 @@ export function signRefreshToken(userId) {
 }
 
 export function authMiddleware(req, res, next) {
+    // debugger;
     const accessToken = req.header("Authorization")?.split(" ")[1];
     const refreshToken = req.cookies.refreshToken;
 
     if (!accessToken && !refreshToken) {
-        // return res.status(401).json({ error: "Access denied; no token provided." });
+        // No access token or refresh token provided
         return res.status(401).redirect("/");
     }
 
@@ -23,19 +24,21 @@ export function authMiddleware(req, res, next) {
             req.userId = decoded.sub;
             return next();
         } catch (error) {
-            // Access token is invalid
+            // Access token exists but is invalid or expired
             if (
                 error.name !== "TokenExpiredError" &&
                 error.name !== "JsonWebTokenError"
             ) {
-                return res.status(401).json({ error: "Invalid access token."});
+                // Unexpected token error, cannot refresh, new login required
+                return res.status(401).redirect("/");
             }
             // Fall through to refresh token below
         }
     }
 
     if (!refreshToken) {
-        return res.status(401).json({ error: "Access token invalid or expired, and no refresh token found."});
+        // Access token is invalid or expired, no refresh token to refresh. Login required.
+        return res.status(401).redirect("/");
     }
 
     try {
@@ -43,10 +46,12 @@ export function authMiddleware(req, res, next) {
         const newAccessToken = signAccessToken(decodedRefresh.sub);
         
         res.setHeader("x-access-token", newAccessToken);
-        req.userId = decodedRefresh.sub; // Set user ID for the current request
+        // Set user ID for the current request
+        req.userId = decodedRefresh.sub; 
         next();
+
     } catch (refreshError) {
-        // Refresh token exists but it also invalid or expired.
-        return res.status(401).json({ error: "Invalid or expired refresh token; log in access."});
+        // Refresh token exists but is invalid or expired.
+        return res.status(401).redirect("/");
     }
 }
