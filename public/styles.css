@@ -99,6 +99,14 @@ button:hover {
     padding: 20px;
 }
 
+/* Text */
+.username {
+    font-weight: 700;
+}
+
+.jot-date {
+    color: #b6b6b6;
+}
 
 .ui-message-error {
     border: 1px solid #E03C31;
@@ -229,7 +237,7 @@ footer {
 /* Controls */
 .controls {
     gap: 10px;
-    margin: 0px 10px;
+    margin: 0px;
 }
 
 /* Generic flex */
@@ -238,13 +246,26 @@ footer {
     padding: 20px;
 }
 
+.flex-container-internal {
+    display: flex;
+}
+
 .flex-row {
     flex-direction: row;
+}
+
+.flex-column {
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .flex-row-reverse {
     flex-direction: row-reverse;
 }
+.flex-align-bottom {
+    justify-content: flex-end;
+}
+
 .justify-between {
     justify-content: space-between;
 }
@@ -326,3 +347,4 @@ input.jot {
 .color-picker input[type="radio"]:hover + .color-circle {
     border: 2px solid black;
 }
+

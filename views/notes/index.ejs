@@ -2,7 +2,7 @@
 
 <div class="container">
   <div class="container-content">
-    <p>Logged in as <b><%= username %></b></p>
+    <p>Logged in as <span class="username"><%= username %></span></p>
     <!-- <p>This is the private homepage, must be logged in to see this.</p>
     <b><a href="/notes/new">Create a new note</a></b>
     <form action="/notes/new">
@@ -11,7 +11,19 @@
   </div>
 
   <% if (notes.length === 0) { %>
-  <p>There are no notes.</p>
+  <!-- <p>You don't have any notes yet</p> -->
+  <div class="note-grid">
+    <div class="note-container jot-panel-black">
+      <div class="note-header black"></div>
+      <div class="note-content">
+        <h3>Get started!</h3>
+        <p>
+          You don't have any notes yet, click 'New Jot' to keep track of
+          everything.
+        </p>
+      </div>
+    </div>
+  </div>
 
   <% } else { %>
   <div class="note-grid">
@@ -22,15 +34,17 @@
         <h3><%= note.title %></h3>
         <p><%= note.body %></p>
         <p><%= note._id %></p>
-        <p><%= note.date %></p>
       </div>
-      <div class="flex-container flex-row-reverse controls">
-        <form action="/notes/<%= note._id %>?_method=DELETE" method="POST">
-          <button type="submit" class="button-delete">Delete</button>
-        </form>
-        <form action="/notes/<%= note._id %>/edit/">
-          <button type="submit" class="button-white">Edit</button>
-        </form>
+      <div class="flex-container justify-between">
+        <div class="jot-date"><%= note.date.toDateString() %></div>
+        <div class="flex-container-internal controls">
+          <form action="/notes/<%= note._id %>/edit/">
+            <button type="submit" class="button-white">Edit</button>
+          </form>
+          <form action="/notes/<%= note._id %>?_method=DELETE" method="POST">
+            <button type="submit" class="button-delete">Delete</button>
+          </form>
+        </div>
       </div>
     </div>
     <% }) %> <% } %>

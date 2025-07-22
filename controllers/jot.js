@@ -79,9 +79,10 @@ export async function renderEditNoteForm(req, res) {
 export async function editNote(req, res) {
     try {
         const { title, body, color } = req.body;
+        const updateDate = new Date();
         const note = await JotNote.findOneAndUpdate(
             { _id: req.params.id, username: req.userId }, 
-            { title, body, color },
+            { title, body, color, date: updateDate },
             { new: true }
         );
         if (!note) {
