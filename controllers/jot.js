@@ -2,15 +2,13 @@ import JotNote from "../models/notes.js"
 import User from "../models/users.js"
 
 export function renderIndex(req, res) {
-    // console.log("renderIndex");
     res.render("index", { title: "JOT HOME" , uiMessages: { login: null }});
 }
 
 export async function createNote(req, res) {
-    // debugger;
+    // Inserts new note into the database
     try {
         const { title, body, color } = req.body;
-        // console.log(req.body.color);
         await JotNote.create({
             username: req.userId,
             title,
@@ -19,18 +17,18 @@ export async function createNote(req, res) {
         });
         res.redirect('/notes/');
     } catch (error) {
-        console.error("Error creating new note:", error);
-        res.status(500);
+        // Reload notes without update in case of error
+        res.redirect('/notes/');
     }
 }
 
 export async function getNotes(req, res) {
+    // Get all notes for a single user, sorted by last update date newest to oldest
     try {
-        // debugger;
         const notes = await JotNote.find({ username: req.userId }).sort({ date: -1 });
         const user = await User.findById(req.userId);
-        const username = user.username
-        res.render("notes/index", { title: "My Notes", notes, username });
+        const username = user.username // To display username while logged in
+        res.render("notes/index", { notes, username });
     } catch (error) {
         console.error("Failed to fetch notes:", error);
         res.status(500).send("Failed to fetch notes.");
@@ -38,12 +36,12 @@ export async function getNotes(req, res) {
 }
 
 export async function renderNewNoteForm(req, res) {
-    res.render("notes/create", {
-        title: "Create a New Note"
-    });
+    // Load create note form
+    res.render("notes/create");
 }
 
 export async function deleteNote(req, res) {
+    // Delete a single note
     try {
         // Check note belongs to logged in user (broken access control mitigation)
         const note = await JotNote.findOne({ _id: req.params.id, username: req.userId });
@@ -60,16 +58,15 @@ export async function deleteNote(req, res) {
 }
 
 export async function renderEditNoteForm(req, res) {
+    // Load edit note form
     try {
+        // Get current note from database to populate form fields
         const noteId = req.params.id;
         const note = await JotNote.findById(noteId);
         if (!note) {
-            res.status(404).send("Note not found");
+            return res.status(404).send("Note not found");
         }
-        res.render("notes/edit", {
-            title: "Update Note",
-            note
-        });
+        res.render("notes/edit", { note });
     } catch (error) {
         console.error("Error fetching note to edit.");
         res.status(500).send("Error loading edit form.");
@@ -77,6 +74,7 @@ export async function renderEditNoteForm(req, res) {
 }
 
 export async function editNote(req, res) {
+    // Update note in database and return to view all notes
     try {
         const { title, body, color } = req.body;
         const updateDate = new Date();
