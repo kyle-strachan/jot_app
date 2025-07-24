@@ -10,6 +10,13 @@ A secure note-taking app using Node.js, Express, EJS, and MongoDB.
 ## Screenshot
 ![Screenshot of app's user interface](./public/images/jot-screenshot.jpg)
 
+## Installation
+```
+git clone https://github.com/kyle-strachan/jot_app.git
+cd jot_app
+npm install
+```
+
 ## Setup
 ### Prerequisites
 1. Node.js
@@ -17,19 +24,12 @@ A secure note-taking app using Node.js, Express, EJS, and MongoDB.
 2. MongoDB, running locally or remote.
 
 ### Environment variables
-Create a .env file the project's root directory.
+Create a .env file the project's root directory with unique access and refresh secrets.
 ```
 MONGO_URL=mongodb://localhost:27017/DatabaseName
 ACCESS_SECRET=AccessSecret
 REFRESH_SECRET=RefreshSecret
 PORT=3000
-```
-
-## Installation
-```
-git clone https://github.com/kyle-strachan/jot_app.git
-cd jot_app
-npm install
 ```
 
 ## Run locally
