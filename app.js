@@ -1,43 +1,40 @@
-import express from "express";
 import path from "path"; // Required to use views and public folders
 import { fileURLToPath } from "url";
-import expressEjsLayouts from "express-ejs-layouts";
+
+import express from "express";
 import mongoose from "mongoose";
-import 'dotenv/config';
-import jotRoutes from "./routes/jotRoutes.js";
+import expressEjsLayouts from "express-ejs-layouts";
 import methodOverride from "method-override";
 import cookieParser from "cookie-parser"; // Required to read refreshToken
+
+import 'dotenv/config';
+import jotRoutes from "./routes/jotRoutes.js";
 import { rateLimitMiddleware } from "./middleware/rateLimit.js";
 
+// App init and path setup
 const app = express();
-const PORT = process.env.PORT //|| 3000
+const PORT = process.env.PORT;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// App config
-app.set("views", path.join(__dirname, "views"));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
-
-// Next bit is required to look for DELETE method inside a POST request
-app.use(methodOverride('_method'));
-
 // View engine config
-app.set("view engine", "ejs");
-app.set("layout", "layouts/main");
-
-// Middleware config
+app.set("views", path.join(__dirname, "views")); // Define where views are located
+app.set("view engine", "ejs"); 
+app.set("layout", "layouts/template");
 app.use(expressEjsLayouts);
+
+// Static files and middleware
+app.use(express.static(path.join(__dirname, "public")));
+app.use(cookieParser());
+app.use(methodOverride('_method')); // Required to look for DELETE method inside a POST request
 app.use(express.urlencoded({ extended: true })); // had to add as post from ejs from was undefined. Research further
 app.use(express.json()); // Provides ability to destructure JSON
-
-// Protect all routes with rate limiter
-app.use(rateLimitMiddleware);
+app.use(rateLimitMiddleware); // Protect all routes with rate limiter
 
 // Router config
 app.use("/", jotRoutes);
 
-// Database connection
+// Database connection and start server
 mongoose.connect(process.env.MONGO_URL)
 .then(() => {
     console.log("Connected to MongoDB");
