@@ -9,22 +9,23 @@ export function signRefreshToken(userId) {
 }
 
 export function authMiddleware(req, res, next) {
-    // debugger;
     const accessToken = req.header("Authorization")?.split(" ")[1];
     const refreshToken = req.cookies.refreshToken;
 
     if (!accessToken && !refreshToken) {
-        // No access token or refresh token provided
+        // No access token or refresh token provided, return to login
         return res.status(401).redirect("/");
     }
 
     if (accessToken) {
+        // accessToken present, check if it's still valid
         try {
             const decoded = jwt.verify(accessToken, process.env.ACCESS_SECRET);
             req.userId = decoded.sub;
             return next();
         } catch (error) {
-            // Access token exists but is invalid or expired
+            // Access token exists, but is invalid or expired
+            // Check for expected errors
             if (
                 error.name !== "TokenExpiredError" &&
                 error.name !== "JsonWebTokenError"
@@ -36,12 +37,14 @@ export function authMiddleware(req, res, next) {
         }
     }
 
+    // Check if accessToken can be refreshed with valid refreshToken
     if (!refreshToken) {
-        // Access token is invalid or expired, no refresh token to refresh. Login required.
+        // No refresh token exto refresh, cannot reissue accessToken, new login required
         return res.status(401).redirect("/");
     }
 
     try {
+        // refreshToken exists, verify if still valid.
         const decodedRefresh = jwt.verify(refreshToken, process.env.REFRESH_SECRET);
         const newAccessToken = signAccessToken(decodedRefresh.sub);
         
@@ -51,7 +54,7 @@ export function authMiddleware(req, res, next) {
         next();
 
     } catch (refreshError) {
-        // Refresh token exists but is invalid or expired.
+        // Refresh token exists but is invalid or expired, new login required.
         return res.status(401).redirect("/");
     }
 }
