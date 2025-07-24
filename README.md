@@ -27,7 +27,7 @@ PORT=3000
 
 ## Installation
 ```
-git clone [public link pending]
+git clone https://github.com/kyle-strachan/jot_app.git
 cd jot_app
 npm install
 ```
