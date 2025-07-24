@@ -1,33 +1,52 @@
 :root {
     --system-grey: #F5F5F5;
-    --system-panel-hover: #dbdbdb;
-    --system-panel: #ffffff;
-    --system-panel-border: #E9E9E9;
+    --jot-panel-hover: #dbdbdb;
+    --jot-panel: #ffffff;
+    --jot-panel-border: #E9E9E9;
     --system-blue: #d42000;
     --system-blue-bg: #d6edff;
     --system-blue-hover:#960500;
-    --system-box-shadow: rgba(116, 116, 116, 0.2);
+    --jot-box-shadow: rgba(116, 116, 116, 0.2);
     --default-color: #553634;
     --header-height: 50px;
-    /* font-family: "Inter", sans-serif; */
+    --default-margin: 20px;
+    
+    --jot-black: black;
+    --jot-blue: #4E87A0;
+    --jot-green: #00B388;
+    --jot-grey: #808080;
+    --jot-purple: #24135F;
+    --jot-red: #E03C31;
+    --jot-white: #FFFFFF;
+    --jot-yellow: #EAAA00;
+    --jot-bg: #f5f4f2;
+    --jot-ui-error-bg: #ffeef1;
 }
 
+/* Reset, applied after normalize */
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: "Inter", sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+    font-family: "Inter", sans-serif;
+    font-weight: 300;
 }
 
 body {
-    color: black;
-    background-color: rgb(245, 244, 242);
-    /* font-family: "Inter", sans-serif; */
-    font-weight: 300;
-    font-size: 15px;
+    background-color: var(--jot-bg);
+    color: var(--jot-black);
 }
+
+/* Jot theme colours classes */
+.black { background-color: var(--jot-black); }
+.blue { background-color: var(--jot-blue); }
+.green { background-color: var(--jot-green); }
+.purple { background-color: var(--jot-purple); }
+.red { background-color: var(--jot-red); }
+.yellow { background-color: var(--jot-yellow); }
 
 /* Headers */
 h1 {
@@ -38,68 +57,97 @@ h1 {
     margin: 20px 0 20px 0;
 }
 
+h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.7rem;
+}
+
 /* Buttons */
 button {
+    border: 1px solid var(--jot-black);
     border-radius: 5px;
+    font-size: 1.0rem;
     margin: 10px 0px;
     padding: 10px;
-    border: 1px solid black;
-    /* font-family: "Inter", sans-serif; */
-    font-size: 1.0rem;
 }
+ 
 button:hover {
     cursor: pointer;
 }
-.link-as-button {
-    border-radius: 5px;
-    margin: 10px 0px;
-    padding: 10px;
-    border: 1px solid black;
-    /* font-family: "Inter", sans-serif; */
-    font-size: 1.0rem;
-    text-decoration: none;
-    color: black;
-}
-.link-as-button:hover{
-    color: white;
-    border-color: #E03C31;
-    background-color: #E03C31;
-}
-
-
 .button-black {
-    color: white;
-    background-color: black;
+    background-color: var(--jot-black);
+    color: var(--jot-white);
 }
 .button-black:hover {
-    color: black;
-    background-color: white;
+    background-color: var(--jot-white);
+    color: var(--jot-black);
 }
 .button-white {
-    color: black;
-    background-color: white;
+    background-color: var(--jot-white);
+    color: var(--jot-black);
 }
 .button-white:hover {
-    color: white;
-    background-color: black;
+    background-color: var(--jot-black);
+    color: var(--jot-white);
 }
 .button-delete {
-    color: black;
-    background-color: white;
+    background-color: var(--jot-white);
+    color: var(--jot-black);
 }
 .button-delete:hover {
-    color: white;
-    border-color: #E03C31;
-    background-color: #E03C31;
+    background-color: var(--jot-red);
+    border-color: var(--jot-red);
+    color: var(--jot-white);
+}
+.link-as-button {
+    border: 1px solid var(--jot-black);
+    border-radius: 5px;
+    color: var(--jot-black);
+    font-size: 1.0rem;
+    margin: 10px 0px;
+    padding: 10px;
+    text-decoration: none;
+}
+.link-as-button:hover{
+    color: var(--jot-white);
+    background-color: var(--jot-red);
+    border-color: var(--jot-red);
 }
 
-.note-container {
-    border: 1px solid grey;
-    margin: 30px 10px;
-    padding: 20px;
+/* Inputs */
+textarea.jot {
+    border-radius: 5px;
+    font-size: 1.2rem;
+    padding: 5px 7px;
+    width: 100%;
 }
+input.jot {
+    border: 1px solid var(--jot-black);
+    border-radius: 5px;
+    font-size: 1.2rem;
+    padding: 5px 7px;
+    width: 100%;
+}
+.jot-label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    margin-top: 20px;
+}
+
 
 /* Text */
+p {
+    margin-bottom: 20px;
+    line-height: 1.3rem;
+}
+
 .username {
     font-weight: 700;
 }
@@ -109,34 +157,162 @@ button:hover {
 }
 
 .jot-date {
-    color: #b6b6b6;
+    color: var(--jot-grey);
     justify-content: flex-end;
     display: flex;
     flex-direction: column;
-    padding-bottom: 10px;
+    /* padding-bottom: 10px; */
 }
 
 .ui-message-error {
-    border: 1px solid #E03C31;
+    border: 1px solid var(--jot-red);
     border-radius: 5px;
-    background-color: rgb(255, 238, 241);
-    color: #E03C31;
+    background-color: var(--jot-ui-error-bg);
+    color: var(--jot-red);
     padding: 5px 10px;
     margin: 5px 0;
 }
 
 
+/* Layout */
+
+.header {
+    justify-content: space-between;
+}
+
+.container {
+    margin: auto;
+    max-width: 1000px;
+    padding: var(--default-margin);
+}
+
+/* Note diplay */
+.notes-display {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 35px;
+}
+@media (min-width: 768px) {
+    .notes-display {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.note-container {
+    background-color: var(--jot-panel);
+    border: 1px solid var(--jot-panel-border);
+    border-radius: 10px;
+    box-shadow: 0px 5px 5px var(--jot-box-shadow);
+    display: flex;
+    flex: 1 1;
+    flex-direction: column;
+    min-height: 200px;
+    min-width: 300px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.note-header {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 10px;
+}
+
+.note-content-container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.note-controls-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    gap: 10px;
+    margin: 0px;
+}
+
+.note-controls {
+    display: flex;
+    gap: 10px;
+    margin: 0px;
+}
+.note-controls button {
+    margin: 0;
+}
+
+/* Header */
+header {
+    padding: var(--default-margin);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items:first baseline;
+}
+@media (max-width: 768px) {
+    header .login-subtitle {
+        display: none;
+    }
+}
+
+/* Generic flex */
+.flex-container-header {
+    display: flex;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+.align-center {
+    align-items:first baseline;
+}
+.align-bottom {
+    align-items:last baseline;
+}
+
+
+
+/* Output color combination */
+.jot-panel-black:hover {background-color: rgb(233, 233, 233);}
+.jot-panel-red:hover {background-color: #ffd2cf;}
+.jot-panel-blue:hover {background-color: #cff1ff;}
+.jot-panel-green:hover {background-color: #d2fff5;}
+.jot-panel-yellow:hover {background-color: #fff2d0;}
+.jot-panel-purple:hover {background-color: #ebe5ff;}
+
+
+
+/* Footer*/
+footer {
+    margin-top: 75px;
+}
+.footer-credits {
+    color: var(--jot-grey);
+    font-size: 0.8rem;
+    text-align: center;
+    margin: 20px auto;
+}
+
+
 /* Login portal */
 .login-panel {
-    background-color: var(--system-panel);
-    border: 1px solid var(--system-panel-border);
+    background-color: var(--jot-panel);
+    border: 1px solid var(--jot-panel-border);
     border-radius: 10px;
     width: 395px;
     margin: 50px auto;
-    box-shadow: 0px 5px 5px var(--system-box-shadow);
+    box-shadow: 0px 5px 5px var(--jot-box-shadow);
 }
 .login-panel-header {
-    /* background-color: black; */
     background-image: url("/images/login-panel-header-pattern.webp");
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -155,6 +331,8 @@ button:hover {
     margin-bottom: 30px;
 }
 
+
+
 .login-panel input {
     width: 100%;
     height: 2rem;
@@ -162,7 +340,7 @@ button:hover {
     margin-top: 4px;
     margin-bottom: 10px;
     border-radius: 5px;
-    border: 1px solid black;
+    border: 1px solid var(--jot-black);
     font-family: "Inter", sans-serif;
 }
 
@@ -175,207 +353,33 @@ button:hover {
     margin-bottom: 10px;
 }
 
-/* Jot containers */
-.container {
-    max-width: 1000px;
-    margin: auto;
-}
-
-.container-content {
-    padding: 20px;
-}
-
-/* Header */
-.header {
-    justify-content: space-between;
-}
-
-/* Footer*/
-footer {
-    margin-top: 75px;
-}
-.footer-credits {
-    color: #888;
-    font-size: 0.8rem;
-    text-align: center;
-    margin: 20px auto;
-}
-
-
-/* Note diplay */
-
-.note-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 35px;
-    /* flex-direction: row; */
-    max-width: 1200px;
-    /* padding: 50px; */
-    /* background-color: red; */
-    margin: 20px;
-    align-items: stretch; /* NEW */
-}
-
-.note-container {
-    background-color: var(--system-panel);
-    border: 1px solid var(--system-panel-border);
-    border-radius: 10px;
-    box-shadow: 0px 5px 5px var(--system-box-shadow);
-    display: flex;
-    flex-direction: column; /* NEW */
-    min-width: 400px;
-    flex: 1 1 30%;
-    margin: 0px;
-    padding: 0px;
-}
-
-/* .note-container:hover {
-    background-color: var(--system-panel-hover);
-    border: 1px solid black;
-} */
-
-.note-header {
-    /* background-color: green; */
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    height: 10px;
-}
-
-.note-content-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    /* min-height: 200px; */
-    flex: 1; /* NEW */
-}
-
-.note-content {
-    padding: 20px;
-    /* margin-bottom: 10px; */
-}
-
-
-
-/* Controls */
-.controls {
-    display: flex;
-    gap: 10px;
-    margin: 0px;
-}
-
-/* Generic flex */
-.flex-container-header {
-    display: flex;
-}
-
-.flex-container {
-    display: flex;
-    padding: 20px;
-}
-
-
-.flex-container-internal {
-    display: flex;
-}
-
-.flex-row {
-    flex-direction: row;
-}
-
-.flex-column {
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.flex-row-reverse {
-    flex-direction: row-reverse;
-}
-.flex-align-bottom {
-    justify-content: flex-end;
-}
-
-.justify-between {
-    justify-content: space-between;
-}
-.align-center {
-    align-items:first baseline;
-}
-.align-bottom {
-    align-items:last baseline;
-}
-
-/* Panel colours */
-.panel-green:hover {
-    background-color: rgb(226, 238, 212);
-}
-
-/* Inputs */
-
-textarea.jot {
-    width: 100%;
-    padding: 5px 7px;
-    font-size: 1.2rem;
-    border-radius: 5px;
-}
-
-input.jot {
-    width: 100%;
-    padding: 5px 7px;
-    font-size: 1.2rem;
-    border-radius: 5px;
-    border: 1px solid black;
-}
-
-.jot-label {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-top: 20px;
-    margin-bottom: 5px;
-}
 
 /* Radio colour picker */
 .color-picker {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    margin: 1.5rem 0;
 }
 
 .color-picker input[type="radio"] {
-  display: none; /* hide the default radio button */
+    /* Hide the default radio button */
+    display: none; 
 }
 
 .color-circle {
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  border: 2px solid transparent;
-  cursor: pointer;
-  /* transition: border 0.2s; */
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
 }
 
-/* Color classes */
-.black { background-color: black; }
-.red { background-color: #E03C31; }
-.blue { background-color: #4E87A0; }
-.green { background-color: #00B388; }
-.yellow { background-color: #eaaa00; }
-.purple { background-color: #24135F; }
-
-/* Output color combination */
-.jot-panel-black:hover {background-color: rgb(233, 233, 233);}
-.jot-panel-red:hover {background-color: #ffd2cf;}
-.jot-panel-blue:hover {background-color: #cff1ff;}
-.jot-panel-green:hover {background-color: #d2fff5;}
-.jot-panel-yellow:hover {background-color: #fff2d0;}
-.jot-panel-purple:hover {background-color: #ebe5ff;}
-
-/* Outline the selected one */
+/* Outline the selected colour choice */
 .color-picker input[type="radio"]:checked + .color-circle {
-  border-color: black;
+  border-color: var(--jot-black);
 }
 
 .color-picker input[type="radio"]:hover + .color-circle {
-    border: 2px solid black;
+    border: 2px solid var(--jot-black);
 }
-

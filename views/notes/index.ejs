@@ -1,18 +1,11 @@
 <%- contentFor("body") %><%- include("../partials/header.ejs") %>
 
 <div class="container">
-  <div class="container-content">
-    <p>Logged in as <span class="username"><%= username %></span></p>
-    <!-- <p>This is the private homepage, must be logged in to see this.</p>
-    <b><a href="/notes/new">Create a new note</a></b>
-    <form action="/notes/new">
-      <button type="submit" class="button-black">New Jot</button>
-    </form> -->
-  </div>
+  <p>Logged in as <span class="username"><%= username %></span></p>
 
   <% if (notes.length === 0) { %>
   <!-- <p>You don't have any notes yet</p> -->
-  <div class="note-grid">
+  <div class="note-display">
     <div class="note-container jot-panel-black">
       <div class="note-header black"></div>
       <div class="note-content">
@@ -26,21 +19,21 @@
   </div>
 
   <% } else { %>
-  <div class="note-grid">
+  <div class="notes-display">
     <% notes.forEach(note => { %>
     <div class="note-container jot-panel-<%= note.color %>">
       <div class="note-header <%= note.color %>"></div>
       <div class="note-content-container">
-        <div class="note-content">
+        <div>
           <h3><%= note.title %></h3>
           <p><%= note.body %></p>
           <!-- <p><%= // note._id %></p> -->
         </div>
-        <div class="flex-container justify-between">
+        <div class="note-controls-container">
           <div class="jot-date">
             <div><%= note.date.toDateString() %></div>
           </div>
-          <div class="flex-container-internal controls">
+          <div class="note-controls">
             <form action="/notes/<%= note._id %>/edit/">
               <button type="submit" class="button-white">Edit</button>
             </form>

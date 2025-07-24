@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jot | Note-taking app</title>
     <link rel="stylesheet" href="/normalize.css" />
+    <!-- Used first before margin and padding reset in project's CSS -->
     <link rel="stylesheet" href="/styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,8 +15,6 @@
     />
   </head>
   <body>
-    <div class="temp"><%- body %></div>
-
-    <%- include("../partials/footer.ejs") %>
+    <%- body %> <%- include("../partials/footer.ejs") %>
   </body>
 </html>

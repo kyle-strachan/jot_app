@@ -1,21 +1,24 @@
 # Jot
-A note-taking app using Node.js, Express, EJS, and MongoDB.
+A secure note-taking app using Node.js, Express, EJS, and MongoDB.
 
 ## Features
-* JWT User authentication with bcrypt hashing
+* JWT user authentication with bcrypt hashing
 * CRUD operations on notes
 * Colour-coded notes
 
 ## Setup
 ### Prerequisites
-1. MongoDB must be installed.
+1. Node.js
+    1. Ensure `node` and `npm` are available in the command line.
+2. MongoDB
+   1. Running locally or remote.
 
 ### Environment variables
 Create a .env file the project's root directory.
 ```
-ACCESS_SECRET=yourAccessSecret
-REFRESH_SECRET=yourRefreshSecret
-MONGODB_URI=yourMongoConnectionString
+ACCESS_SECRET=AccessSecret
+REFRESH_SECRET=RefreshSecret
+MONGODB_URI=MongoConnectionString
 PORT=3000
 ```
 
