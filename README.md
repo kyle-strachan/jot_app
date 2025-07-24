@@ -19,9 +19,9 @@ A secure note-taking app using Node.js, Express, EJS, and MongoDB.
 ### Environment variables
 Create a .env file the project's root directory.
 ```
+MONGO_URL=mongodb://localhost:27017/DatabaseName
 ACCESS_SECRET=AccessSecret
 REFRESH_SECRET=RefreshSecret
-MONGODB_URI=MongoConnectionString
 PORT=3000
 ```
 
