@@ -5,13 +5,16 @@ A secure note-taking app using Node.js, Express, EJS, and MongoDB.
 * JWT user authentication with bcrypt hashing
 * CRUD operations on notes
 * Colour-coded notes
+* Simple, responsive UI
+
+## Screenshot
+![Screenshot of app's user interface](./public/images/jot-screenshot.jpg)
 
 ## Setup
 ### Prerequisites
 1. Node.js
     1. Ensure `node` and `npm` are available in the command line.
-2. MongoDB
-   1. Running locally or remote.
+2. MongoDB, running locally or remote.
 
 ### Environment variables
 Create a .env file the project's root directory.
@@ -54,3 +57,7 @@ npm start
 | GET    | `/notes/:id/edit`  | Show edit form for a note       |
 | PUT    | `/notes/:id`       | Update a note                   |
 | DELETE | `/notes/:id`       | Delete a note                   |
+
+## Future Development
+1. Bug: New lines are not saved.
+2. Introduce a search function
