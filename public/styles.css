@@ -268,7 +268,7 @@ header {
     padding: var(--default-margin);
 }
 @media (max-width: 650px) {
-    header .login-subtitle {
+    header .subtitle {
         display: none;
     }
 }
@@ -318,7 +318,7 @@ footer {
     box-shadow: 0px 5px 5px var(--jot-box-shadow);
 }
 .login-panel-header {
-    background-image: url("/images/login-panel-header-pattern.webp");
+    background-color: var(--jot-yellow);
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     height: 10px;
@@ -328,15 +328,13 @@ footer {
     padding: 40px;
 }
 
-.login-subtitle {
+.subtitle {
     font-family: "Reenie Beanie", cursive;
     font-weight: 400;
     font-size: 26px;
     padding-left: 20px;
     margin-bottom: 30px;
 }
-
-
 
 .login-panel input {
     width: 100%;
