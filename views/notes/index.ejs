@@ -4,7 +4,7 @@
   <p>Logged in as <span class="username"><%= username %></span></p>
 
   <% if (notes.length === 0) { %>
-  <!-- <p>You don't have any notes yet</p> -->
+  <!-- Placeholder note for new users, or if user deletes all notes -->
   <div class="notes-display">
     <div class="note-container jot-panel-black">
       <div class="note-header black"></div>
@@ -27,7 +27,7 @@
         <div>
           <h3><%= note.title %></h3>
           <p><%= note.body %></p>
-          <!-- <p><%= // note._id %></p> -->
+          <!-- <p>Testing note: <%= // note._id %></p> -->
         </div>
         <div class="note-controls-container">
           <div class="jot-date">

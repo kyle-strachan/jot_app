@@ -19,6 +19,7 @@
     <textarea name="body" id="body" class="jot" rows="10" required>
 <%= note.body %></textarea
     ><br />
+    <!-- Colour picker radio circles -->
     <div class="color-picker">
       <label>
         <input type="radio" name="color" value="black" <%= note.color ===
@@ -51,6 +52,7 @@
         <span class="color-circle purple"></span>
       </label>
     </div>
+    <!-- Buttons to action form -->
     <div class="controls">
       <button type="submit" class="button-black">Update Jot</button
       ><a href="/notes" class="link-as-button">Cancel</a>
