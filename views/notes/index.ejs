@@ -2,6 +2,9 @@
 
 <div class="container">
   <p>Logged in as <span class="username"><%= username %></span></p>
+  <p class="ui-response">
+    <%= typeof response !== 'undefined' ? response : "" %>
+  </p>
 
   <% if (notes.length === 0) { %>
   <!-- Placeholder note for new users, or if user deletes all notes -->

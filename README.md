@@ -24,7 +24,7 @@ npm install
 2. MongoDB, running locally or remote.
 
 ### Environment variables
-Create a .env file the project's root directory with unique access and refresh secrets.
+Create a .env file in the project's root directory with unique access and refresh secrets.
 ```
 MONGO_URL=mongodb://localhost:27017/DatabaseName
 ACCESS_SECRET=AccessSecret
@@ -32,12 +32,15 @@ REFRESH_SECRET=RefreshSecret
 PORT=3000
 ```
 
+For production environments, add `NODE_ENV=production` for HTTPS cookie transmission.
+
 ## Run locally
 ```
 npm start
 ```
 
 ## API Endpoints
+While the application uses server-rendered views with EJS, routes are designed in RESTful structure and HTTP methods (GET, POST, PUT, DELETE). All endpoints handle errors gracefully back to UI instead of JSON responses.
 
 ### Auth Routes
 
