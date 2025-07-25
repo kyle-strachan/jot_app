@@ -60,9 +60,8 @@ export async function deleteNote(req, res) {
 export async function renderEditNoteForm(req, res) {
     // Load edit note form
     try {
-        // Get current note from database to populate form fields
-        const noteId = req.params.id;
-        const note = await JotNote.findById(noteId);
+        // Get note with username check for security to populate form fields
+        const note = await JotNote.findOne({ _id: req.params.id, username: req.userId });
         if (!note) {
             return res.status(404).send("Note not found");
         }
