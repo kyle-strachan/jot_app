@@ -17,8 +17,7 @@ export async function createNote(req, res) {
         });
         res.redirect('/notes/');
     } catch (error) {
-        // Reload notes without update in case of error
-        res.redirect('/notes/');
+        res.status(500).render("error/error", { message: "Unable to insert note, try again later."});
     }
 }
 
@@ -30,8 +29,7 @@ export async function getNotes(req, res) {
         const username = user.username // To display username while logged in
         res.render("notes/index", { notes, username });
     } catch (error) {
-        console.error("Failed to fetch notes:", error);
-        res.status(500).send("Failed to fetch notes.");
+        res.status(500).render("error/error", { message: "Unable to find your notes, try again later."});
     }
 }
 
@@ -52,8 +50,7 @@ export async function deleteNote(req, res) {
         await note.deleteOne();
         res.redirect("/notes/");
     } catch (error) {
-        console.error("Error deleting note:", error);
-        res.status(500).send("Error deleting note.");
+        res.status(500).render("error/error", { message: "Unable to delete note, try again later."});
     }
 }
 
@@ -67,8 +64,7 @@ export async function renderEditNoteForm(req, res) {
         }
         res.render("notes/edit", { note });
     } catch (error) {
-        console.error("Error fetching note to edit.");
-        res.status(500).send("Error loading edit form.");
+        res.status(500).render("error/error", { message: "Unable to edit note, try again later."});
     }
 }
 
