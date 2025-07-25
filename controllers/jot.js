@@ -91,7 +91,6 @@ export async function editNote(req, res) {
         console.error("Error updating note:", error);
         // Regenerate the edit form with the failed data
         res.status(400).render("/notes/edit", {
-            title: "Edit Note",
             body: req.body,
             error: "Error updating note."
         });
