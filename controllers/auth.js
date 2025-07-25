@@ -17,7 +17,6 @@ export async function register(req, res) {
     // Test username against selected characters, reject if invalid
     if (!REGEX_USERNAME.test(username)) {
         res.render("index", {
-            title: "Registration error",
             uiMessages: { register: `Registration failed: a username may only contain alphanumeric characters and underscores.` }
         });
         return;
@@ -26,7 +25,6 @@ export async function register(req, res) {
     // Test username against minimum length, reject if too short
     if (username.length < USERNAME_MIN_LENGTH) {
         res.render("index", {
-            title: "Registration error",
             uiMessages: { register: `Registration failed: a username must be a minimum of ${USERNAME_MIN_LENGTH} characters long.` }
         });
         return;
@@ -35,7 +33,6 @@ export async function register(req, res) {
     // Test password against selected characters, reject if invalid
     if (!REGEX_PASSWORD.test(password)) {
         res.render("index", {
-            title: "Registration error",
             uiMessages: { register: `Registration failed: a password may only contain the following characters: A-Z, a-z, 0-9, !, @, #, $, %, ^, &, *, (, )` }
         });
         return;
@@ -44,7 +41,6 @@ export async function register(req, res) {
     // Test password against minimum length, reject if too short
     if (password.length < PASSWORD_MIN_LENGTH) {
         res.render("index", {
-            title: "Registration error",
             uiMessages: { register: `Registration failed: a password must be a minimum of ${PASSWORD_MIN_LENGTH} characters long.` }
         });
         return;
@@ -56,7 +52,6 @@ export async function register(req, res) {
         const existingUser = await User.findOne({ username });
         if (existingUser) {
             res.render("index", {
-            title: "Login error",
             uiMessages: { register: "Username already exists, please choose another." }
             });
             return;
@@ -75,14 +70,12 @@ export async function register(req, res) {
         if (error.code === 11000) {
             // Although should be caught in existingUser checks, it possible for an entry to be momentarily in between. Kept in code.
             res.render("index", {
-            title: "Login error",
             uiMessages: { register: "Username already exists, please choose another." }
             });
             return;
         }
         // General server error
         res.render("index", {
-            title: "Login error",
             uiMessages: { register: "Unable to create a new user at this time, please try again later." }
             });
             return;
@@ -110,7 +103,6 @@ export async function login(req, res) {
         // Test if user exists, reject if not. Chose to not specify which credential is incorrect in UI.
         if (!user) {
             res.render("index", {
-                title: "Login error",
                 uiMessages: { login: "Invalid login credentials, please try again." }
             });
             return;
@@ -120,7 +112,6 @@ export async function login(req, res) {
         // Test if password hash matches stored hash, reject if not.
         if (!isValidPassword) {
             res.render("index", {
-                title: "Login error",
                 uiMessages: { login: "Invalid login credentials, please try again." }
             });
             return;
@@ -149,7 +140,6 @@ export async function login(req, res) {
 
     } catch (error) {
         res.render("index", {
-            title: "Login error",
             uiMessages: { login: "An unexpected login error occurred, please try again." }
     });  
     }
