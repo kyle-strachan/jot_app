@@ -34,6 +34,11 @@ app.use(rateLimitMiddleware); // Protect all routes with rate limiter
 // Router config
 app.use("/", jotRoutes);
 
+// Fallback for all other routes
+app.use((req,res) => {
+    res.status(404).render("error/error", { message: "Resource not found." });
+});
+
 // Database connection and start server
 mongoose.connect(process.env.MONGO_URL)
 .then(() => {
