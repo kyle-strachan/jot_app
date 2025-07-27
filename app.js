@@ -11,6 +11,16 @@ import 'dotenv/config';
 import jotRoutes from "./routes/jotRoutes.js";
 import { rateLimitMiddleware } from "./middleware/rateLimit.js";
 
+// Check for environment variable before proceeding
+try {
+    if (!process.env.MONGO_URL || !process.env.ACCESS_SECRET || !process.env.REFRESH_SECRET || !process.env.PORT) {
+        throw new Error("Environment variable are not configured. Refer to documentation before start.");    
+    }
+} catch (error) {
+    console.error(error);
+    process.exit(1);
+}
+
 // App init and path setup
 const app = express();
 const PORT = process.env.PORT;
@@ -39,10 +49,11 @@ app.use((req,res) => {
     res.status(404).render("error/error", { message: "Resource not found." });
 });
 
+
 // Database connection and start server
 mongoose.connect(process.env.MONGO_URL)
 .then(() => {
-    console.log("Connected to MongoDB");
+    // console.log("Connected to MongoDB");
     app.listen(PORT, () => {
         console.log(`Server is running on http://localhost:${PORT}`);
     });
