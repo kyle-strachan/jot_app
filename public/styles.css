@@ -231,6 +231,10 @@ p {
     padding: 20px;
 }
 
+.note-content {
+    white-space: pre-wrap;
+}
+
 .note-controls-container {
     display: flex;
     justify-content: space-between;
