@@ -9,7 +9,7 @@ export function signRefreshToken(userId) {
 }
 
 export function authMiddleware(req, res, next) {
-    const accessToken = req.header("Authorization")?.split(" ")[1];
+    const accessToken = req.cookies.accessToken;
     const refreshToken = req.cookies.refreshToken;
 
     if (!accessToken && !refreshToken) {
@@ -48,7 +48,12 @@ export function authMiddleware(req, res, next) {
         const decodedRefresh = jwt.verify(refreshToken, process.env.REFRESH_SECRET);
         const newAccessToken = signAccessToken(decodedRefresh.sub);
         
-        res.setHeader("x-access-token", newAccessToken);
+        res.cookie("accessToken", newAccessToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "Lax",
+            maxAge: 15 * 60 * 1000 // 15 mins
+        });
         // Set user ID for the current request
         req.userId = decodedRefresh.sub; 
         next();
