@@ -92,6 +92,11 @@ export async function login(req, res) {
             secure: process.env.NODE_ENV === "production",
             sameSite: "Lax"
         });
+        res.clearCookie("accessToken", {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "Lax"
+        });
     
         let { username, password } = req.body;
         
