@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
 
-const jotSchema = new mongoose.Schema({
-    username: {
-        type: String,
+const jotnote = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
         required: true
     },
     title: {
@@ -22,6 +23,6 @@ const jotSchema = new mongoose.Schema({
         enum: ["black", "red", "blue", "green", "yellow", "purple"],
         default: "black"
     }
-});
+}, { strict: true });
 
-export default mongoose.model('jotSchema', jotSchema);
+export default mongoose.model('Jot', jotnote);
