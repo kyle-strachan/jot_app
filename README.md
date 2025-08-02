@@ -5,7 +5,7 @@ A secure note-taking app using Node.js, Express, EJS, and MongoDB.
 * JWT user authentication with bcrypt hashing
 * CRUD operations on notes
 * Colour-coded notes
-* Simple, responsive UI
+* Responsive UI
 
 ## Screenshot
 ![Screenshot of app's user interface](./public/images/jot-screenshot.jpg)
@@ -40,7 +40,7 @@ npm start
 ```
 
 ## API Endpoints
-While the application uses server-rendered views with EJS, routes are designed in RESTful structure and HTTP methods (GET, POST, PUT, DELETE). All endpoints handle errors gracefully back to UI instead of JSON responses.
+The application uses server-rendered views with EJS, routes are designed in RESTful structure and HTTP methods (GET, POST, PUT, DELETE). All endpoints handle errors gracefully back to UI instead of JSON responses.
 
 ### Auth Routes
 
@@ -50,7 +50,7 @@ While the application uses server-rendered views with EJS, routes are designed i
 | POST   | `/login`      | Log in and receive tokens |
 | POST   | `/logout`     | Log out and clear cookies |
 
-### Notes Routes
+### Notes Routes (Protected)
 
 | Method | Endpoint           | Description                      |
 |--------|--------------------|----------------------------------|
@@ -62,5 +62,4 @@ While the application uses server-rendered views with EJS, routes are designed i
 | DELETE | `/notes/:id`       | Delete a note                   |
 
 ## Future Development
-1. Bug: New lines are not saved.
-2. Introduce a search function
+1. Introduce a search function
